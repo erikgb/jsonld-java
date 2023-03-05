@@ -39,8 +39,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<httpclient.version>4.5.13</httpclient.version>
-		<httpcore.version>4.4.14</httpcore.version>
+		<httpclient.version>4.5.14</httpclient.version>
+		<httpcore.version>4.4.16</httpcore.version>
 		<jackson.version>2.11.4</jackson.version>
 		<junit.version>4.13.2</junit.version>
 		<slf4j.version>1.7.32</slf4j.version>
@@ -78,12 +78,6 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -106,12 +100,6 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient-osgi</artifactId>
 				<version>${httpclient.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
@@ -148,47 +136,13 @@
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpmime</artifactId>
-				<version>${httpclient.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore-osgi</artifactId>
 				<version>${httpcore.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore</artifactId>
 				<version>${httpcore.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpcore-nio</artifactId>
-				<version>${httpcore.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
@@ -260,6 +214,22 @@
 									<enforceBytecodeVersion>
 										<maxJdkVersion>1.8</maxJdkVersion>
 									</enforceBytecodeVersion>
+								</rules>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-banned-dependencies</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<bannedDependencies>
+										<excludes>
+											<exclude>commons-logging</exclude>
+										</excludes>
+									</bannedDependencies>
 								</rules>
 								<fail>true</fail>
 							</configuration>
